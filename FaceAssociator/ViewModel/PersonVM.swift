@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SwiftUI
+import CoreLocation
 
 class PersonVM: ObservableObject {
     @Published var people = [Person]()
@@ -43,15 +44,15 @@ class PersonVM: ObservableObject {
         }
     }
     
-    func save(id: UUID, name: String, uiImage: UIImage?) {
+    func save(id: UUID, name: String, uiImage: UIImage?, location: Location?) {
         let documentsDirectory: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let savePath = documentsDirectory
             .appendingPathComponent("people")
         
-        people.append(Person(id: id, name: name, image: uiImage!))
+        people.append(Person(id: id, name: name, location: location, image: uiImage!))
         
         do {
-            let person = Person(id: id, name: name)
+            let person = Person(id: id, name: name, location: location)
             let encoded = try JSONEncoder().encode(person)
             try encoded.write(to: savePath.appendingPathComponent(id.uuidString, conformingTo: .item))
             try uiImage?.jpegData(compressionQuality: 0.8)?.write(to: savePath.appendingPathComponent(id.uuidString, conformingTo: .jpeg))

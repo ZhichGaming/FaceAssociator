@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B8B5323292C5AF50067D68C /* CoreLocationExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8B5322292C5AF50067D68C /* CoreLocationExtention.swift */; };
 		9BC70F90292A017F00792853 /* FaceAssociatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC70F8F292A017F00792853 /* FaceAssociatorApp.swift */; };
 		9BC70F92292A017F00792853 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC70F91292A017F00792853 /* ContentView.swift */; };
 		9BC70F94292A018300792853 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BC70F93292A018300792853 /* Assets.xcassets */; };
@@ -15,9 +16,11 @@
 		9BC70FA5292A086900792853 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC70FA4292A086900792853 /* Person.swift */; };
 		9BC70FA7292A9F6A00792853 /* PersonVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC70FA6292A9F6A00792853 /* PersonVM.swift */; };
 		9BC70FAA292BBC4400792853 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC70FA9292BBC4400792853 /* DetailsView.swift */; };
+		9BC70FAC292BE39700792853 /* LocationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC70FAB292BE39700792853 /* LocationFetcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9B8B5322292C5AF50067D68C /* CoreLocationExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationExtention.swift; sourceTree = "<group>"; };
 		9BC70F8C292A017F00792853 /* FaceAssociator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceAssociator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BC70F8F292A017F00792853 /* FaceAssociatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceAssociatorApp.swift; sourceTree = "<group>"; };
 		9BC70F91292A017F00792853 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -27,6 +30,7 @@
 		9BC70FA4292A086900792853 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		9BC70FA6292A9F6A00792853 /* PersonVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonVM.swift; sourceTree = "<group>"; };
 		9BC70FA9292BBC4400792853 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		9BC70FAB292BE39700792853 /* LocationFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFetcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,8 @@
 			isa = PBXGroup;
 			children = (
 				9BC70F9D292A044B00792853 /* ImagePicker.swift */,
+				9BC70FAB292BE39700792853 /* LocationFetcher.swift */,
+				9B8B5322292C5AF50067D68C /* CoreLocationExtention.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -184,8 +190,10 @@
 				9BC70F9F292A044B00792853 /* ImagePicker.swift in Sources */,
 				9BC70F92292A017F00792853 /* ContentView.swift in Sources */,
 				9BC70F90292A017F00792853 /* FaceAssociatorApp.swift in Sources */,
+				9BC70FAC292BE39700792853 /* LocationFetcher.swift in Sources */,
 				9BC70FA5292A086900792853 /* Person.swift in Sources */,
 				9BC70FA7292A9F6A00792853 /* PersonVM.swift in Sources */,
+				9B8B5323292C5AF50067D68C /* CoreLocationExtention.swift in Sources */,
 				9BC70FAA292BBC4400792853 /* DetailsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,6 +325,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"FaceAssociator/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need to save the location where you saved this face.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -345,6 +354,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"FaceAssociator/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need to save the location where you saved this face.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

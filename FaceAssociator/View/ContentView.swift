@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import CoreLocation
+import MapKit
 
 struct ContentView: View {
     @StateObject var personVM = PersonVM()
@@ -16,6 +18,9 @@ struct ContentView: View {
     @State var id = UUID()
     @State var name = ""
     @State var chosenImage: UIImage?
+    
+    @State var mapRegion: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+    let locationFetcher = LocationFetcher()
     
     var body: some View {
         NavigationView {
@@ -70,12 +75,42 @@ struct ContentView: View {
                                 ImagePicker(image: $chosenImage)
                             }
                         }
+                        
+                        Section {
+                            if locationFetcher.lastKnownLocation != nil {
+                                Map(coordinateRegion: $mapRegion, interactionModes: .zoom, showsUserLocation: true)
+                                    .frame(height: 200)
+                            } else {
+                                Text("You have not allowed the app to view your location.")
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 200)
+                                    .multilineTextAlignment(.center)
+                            }
+                        }
+                        .onAppear {
+                            locationFetcher.start()
+                        }
+                        .onChange(of: locationFetcher.lastKnownLocation) { newLocation in
+                            guard let newLocation = newLocation else {
+                                print("New location is nil")
+                                return
+                            }
+
+                            mapRegion.center = newLocation
+                        }
                     }
                     .navigationTitle("New Person")
                     .toolbar {
                         ToolbarItem(placement: .primaryAction) {
                             Button("Save") {
-                                personVM.save(id: id, name: name, uiImage: chosenImage)
+                                personVM.save(id: id,
+                                              name: name,
+                                              uiImage: chosenImage,
+                                              location:
+                                                locationFetcher.lastKnownLocation != nil
+                                              ? Location(longitude: locationFetcher.lastKnownLocation!.longitude,
+                                                         latitude: locationFetcher.lastKnownLocation!.latitude)
+                                              : nil)
                                 id = UUID()
                                 name = ""
                                 chosenImage = nil
@@ -85,6 +120,7 @@ struct ContentView: View {
                             .disabled(name.isEmpty || chosenImage == nil)
                         }
                     }
+                    
                     if chosenImage != nil {
                         Image(uiImage: chosenImage!)
                     } else {
