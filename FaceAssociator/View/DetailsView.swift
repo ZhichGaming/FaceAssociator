@@ -24,8 +24,13 @@ struct DetailsView: View {
             
             Section {
                 if let items = person.location {
-                    Map(coordinateRegion: $mapRegion, annotationItems: [items]) { location in
+                    Map(coordinateRegion: $mapRegion, interactionModes: .zoom, annotationItems: [items]) { location in
                         MapMarker(coordinate: location.coordinates)
+                    }
+                    .onAppear {
+                        let _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { timer in
+                            mapRegion.center = items.coordinates
+                        }
                     }
                 } else {
                     Text("No location added")
@@ -34,9 +39,7 @@ struct DetailsView: View {
             }
             .frame(height: 200)
         }
-        .onAppear {
-            mapRegion = MKCoordinateRegion(center: person.location?.coordinates ?? CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
-        }
+
     }
 }
 
